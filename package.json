@@ -5,12 +5,12 @@
   "keywords": [
     "swipe",
     "dispatch",
+    "dispatcher",
     "event",
     "customEvent",
     "dispatchEvent"
   ],
-  "private": true,
-  "license": "none",
+  "license": "MIT",
   "author": {
     "email": "eric@webdeveric.com",
     "name": "Eric King",
@@ -42,7 +42,7 @@
     "build:cjs": "babel src -o lib/swipe-dispatcher.cjs.js --no-babelrc --presets es2015",
     "build:module": "babel src -o lib/swipe-dispatcher.module.js",
     "build": "npm run build:workspace && npm run build:cjs && npm run build:module",
-    "postinstall": "npm run build"
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "custom-event-polyfill": "^0.3",
