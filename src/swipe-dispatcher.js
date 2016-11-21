@@ -37,7 +37,6 @@ export default class SwipeDispatcher
 
   handleStart( e )
   {
-    e.preventDefault();
     this.recordData('start', e );
     this.setEventListeners( { move: true, end: true } );
   }
@@ -55,7 +54,6 @@ export default class SwipeDispatcher
 
   handleEnd( e )
   {
-    e.preventDefault();
     this.recordData('end', e );
     this.maybeTriggerSwipe();
     this.reset();
@@ -135,5 +133,4 @@ export default class SwipeDispatcher
 
     this.setEventListeners( { start: true, move: false, end: false } );
   }
-
 }
