@@ -1,21 +1,26 @@
-import 'perfnow';
 import 'custom-event-polyfill';
 
 export default class SwipeDispatcher
 {
-  constructor( { root = document.documentElement, maxTime = 333, minDistance = 100, variance = 100, preventMove = true } = {} )
-  {
-    this.root        = root;
-    this.maxTime     = maxTime;
-    this.minDistance = minDistance;
-    this.variance    = variance;
-    this.preventMove = !!preventMove;
+  events = {
+    start: [ 'touchstart', 'mousedown' ],
+    move: [ 'touchmove', 'mousemove' ],
+    end: [ 'touchend', 'mouseup' ],
+  };
 
-    this.events = {
-      start: [ 'touchstart', 'mousedown' ],
-      move: [ 'touchmove', 'mousemove' ],
-      end: [ 'touchend', 'mouseup' ]
-    };
+  constructor( {
+    root = document.documentElement,
+    maxTime = 333,
+    minDistance = 100,
+    variance = 100,
+    preventMove = true,
+  } = {} )
+  {
+    this.root = root;
+    this.maxTime = maxTime;
+    this.minDistance = minDistance;
+    this.variance = variance;
+    this.preventMove = !!preventMove;
 
     this.reset();
   }
@@ -79,19 +84,19 @@ export default class SwipeDispatcher
 
   recordData( key, e )
   {
-    const touch  = e.changedTouches && e.changedTouches.length === 1 ? e.changedTouches[ 0 ] : false;
-    const target = e.target;
-    const time   = performance.now();
-    const x      = touch ? touch.pageX : e.pageX;
-    const y      = touch ? touch.pageY : e.pageY;
+    const { target } = e;
+    const touch = e.changedTouches && e.changedTouches.length === 1 ? e.changedTouches[ 0 ] : false;
+    const time = performance.now();
+    const x = touch ? touch.pageX : e.pageX;
+    const y = touch ? touch.pageY : e.pageY;
 
     this.data[ key ] = { target, time, x, y };
   }
 
   isSwipe( start, end, xy )
   {
-    const isWithinSwipeTime   = (end.time - start.time) <= this.maxTime;
-    const isWithinVariance    = Math.abs(end[ xy ? 'y' : 'x' ] - start[ xy ? 'y' : 'x' ]) <= this.variance;
+    const isWithinSwipeTime = (end.time - start.time) <= this.maxTime;
+    const isWithinVariance = Math.abs(end[ xy ? 'y' : 'x' ] - start[ xy ? 'y' : 'x' ]) <= this.variance;
     const hasMinSwipeDistance = Math.abs(end[ xy ? 'x' : 'y' ] - start[ xy ? 'x' : 'y' ]) >= this.minDistance;
 
     return isWithinSwipeTime && isWithinVariance && hasMinSwipeDistance;
@@ -106,19 +111,19 @@ export default class SwipeDispatcher
     }
 
     const isHorizontalSwipe = this.isSwipe( start, end, true );
-    const isVerticalSwipe   = this.isSwipe( start, end, false );
+    const isVerticalSwipe = this.isSwipe( start, end, false );
 
     if ( isHorizontalSwipe || isVerticalSwipe ) {
       start.target.dispatchEvent(
         new CustomEvent('swipe', {
           detail: {
-            left:  isHorizontalSwipe && end.x - start.x < 0,
+            left: isHorizontalSwipe && end.x - start.x < 0,
             right: isHorizontalSwipe && end.x - start.x > 0,
-            up:    isVerticalSwipe   && end.y - start.y < 0,
-            down:  isVerticalSwipe   && end.y - start.y > 0
+            up: isVerticalSwipe && end.y - start.y < 0,
+            down: isVerticalSwipe && end.y - start.y > 0,
           },
           bubbles: true,
-          cancelable: true
+          cancelable: true,
         })
       );
     }
@@ -128,9 +133,14 @@ export default class SwipeDispatcher
   {
     this.data = {
       start: null,
-      end: null
+      end: null,
     };
 
     this.setEventListeners( { start: true, move: false, end: false } );
+  }
+
+  stop()
+  {
+    this.setEventListeners( { start: false, move: false, end: false } );
   }
 }
