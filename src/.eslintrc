@@ -1,8 +1,8 @@
 {
   "extends": "webdeveric",
   "env": {
-    "browser": false,
-    "node": true,
+    "browser": true,
+    "node": false,
     "es6": true
   }
 }
