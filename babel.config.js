@@ -2,11 +2,12 @@ const { MODULE_TYPE = 'cjs' } = process.env;
 
 const presets = [
   [
-    "@babel/preset-env",
+    '@babel/preset-env',
     {
-      useBuiltIns: "entry",
+      useBuiltIns: 'entry',
+      corejs: 3,
       ...( MODULE_TYPE === 'module' ? { modules: false } : {} ),
-    }
+    },
   ],
 ];
 
