@@ -26,7 +26,7 @@
     "url": "https://github.com/webdeveric/swipe-dispatcher/issues"
   },
   "engines": {
-    "node": ">= 6.9.0"
+    "node": ">= 8"
   },
   "files": [
     "lib/",
@@ -36,7 +36,7 @@
   "module": "lib/swipe-dispatcher.module.js",
   "jsnext:main": "lib/swipe-dispatcher.module.js",
   "scripts": {
-    "lint": "eslint --fix src",
+    "lint": "eslint --fix ./src ./*.js",
     "doc": "jsdoc -c ./jsdoc.json",
     "test": "mocha",
     "build:workspace": "rimraf ./lib/ && mkdirp ./lib/",
@@ -49,16 +49,17 @@
     "custom-event-polyfill": "^1.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
-    "@babel/preset-env": "^7.3.1",
-    "eslint": "^5.0",
-    "eslint-config-webdeveric": "^0.3",
-    "jsdoc": "^3.5.5",
+    "@babel/preset-env": "^7.6.2",
+    "core-js": "^3.2.1",
+    "eslint": "^6.5.1",
+    "eslint-config-webdeveric": "^0.4",
+    "jsdoc": "^3.6.0",
     "mkdirp": "^0.5.1",
-    "mocha": "^5.0",
-    "rimraf": "^2.6.3"
+    "mocha": "^6.0",
+    "rimraf": "^3.0.0"
   }
 }
