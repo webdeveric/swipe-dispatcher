@@ -20,7 +20,7 @@ export default class SwipeDispatcher
     this.maxTime = maxTime;
     this.minDistance = minDistance;
     this.variance = variance;
-    this.preventMove = !!preventMove;
+    this.preventMove = !! preventMove;
 
     this.reset();
   }
