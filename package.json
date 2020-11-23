@@ -37,14 +37,13 @@
   "jsnext:main": "lib/swipe-dispatcher.module.js",
   "scripts": {
     "lint": "eslint --fix ./src ./*.js",
-    "doc": "jsdoc -c ./jsdoc.json",
     "test": "mocha",
     "build:workspace": "rimraf ./lib/ && mkdirp ./lib/",
     "build:cjs": "MODULE_TYPE=cjs babel src -o lib/swipe-dispatcher.cjs.js --compact",
     "build:module": "MODULE_TYPE=module babel src -o lib/swipe-dispatcher.module.js --compact",
     "prebuild": "npm run build:workspace",
     "build": "npm run build:cjs && npm run build:module",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "custom-event-polyfill": "^1.0"
@@ -55,10 +54,9 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-syntax-object-rest-spread": "^7.8.3",
     "@babel/preset-env": "^7.12.1",
+    "@webdeveric/eslint-config-babel": "^0.1.1",
     "core-js": "^3.7.0",
     "eslint": "^7.13.0",
-    "eslint-config-webdeveric": "^0.7.0",
-    "jsdoc": "^3.6.6",
     "mkdirp": "^1.0.4",
     "mocha": "^8.2.1",
     "rimraf": "^3.0.2"

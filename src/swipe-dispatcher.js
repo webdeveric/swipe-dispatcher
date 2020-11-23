@@ -124,7 +124,7 @@ export default class SwipeDispatcher
           },
           bubbles: true,
           cancelable: true,
-        })
+        }),
       );
     }
   }

@@ -2,6 +2,12 @@
 
 Dispatch custom `swipe` events to DOM nodes.
 
+## Install
+
+```shell
+npm install swipe-dispatcher --save
+```
+
 ## Usage
 
 ```js
