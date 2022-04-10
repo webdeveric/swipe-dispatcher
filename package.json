@@ -54,11 +54,11 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-syntax-object-rest-spread": "^7.8.3",
     "@babel/preset-env": "^7.12.1",
-    "@webdeveric/eslint-config-babel": "^0.1.1",
+    "@webdeveric/eslint-config-babel": "^0.2.4",
     "core-js": "^3.7.0",
-    "eslint": "^7.13.0",
+    "eslint": "^8.13.0",
     "mkdirp": "^1.0.4",
-    "mocha": "^8.2.1",
+    "mocha": "^9.2.2",
     "rimraf": "^3.0.2"
   }
 }

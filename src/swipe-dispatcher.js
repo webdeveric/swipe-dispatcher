@@ -40,16 +40,16 @@ export default class SwipeDispatcher
     });
   }
 
-  handleStart( e )
+  handleStart( event )
   {
-    this.recordData('start', e );
+    this.recordData('start', event );
     this.setEventListeners( { move: true, end: true } );
   }
 
-  handleMove( e )
+  handleMove( event )
   {
     if ( this.preventMove ) {
-      e.preventDefault();
+      event.preventDefault();
     }
 
     if ( performance.now() - this.data.start.time > this.maxTime ) {
@@ -57,40 +57,40 @@ export default class SwipeDispatcher
     }
   }
 
-  handleEnd( e )
+  handleEnd( event )
   {
-    this.recordData('end', e );
+    this.recordData('end', event );
     this.maybeTriggerSwipe();
     this.reset();
   }
 
-  handleEvent( e )
+  handleEvent( event )
   {
-    switch (e.type) {
+    switch (event.type) {
       case 'mousedown':
       case 'touchstart':
-        this.handleStart( e );
+        this.handleStart( event );
         break;
       case 'mousemove':
       case 'touchmove':
-        this.handleMove( e );
+        this.handleMove( event );
         break;
       case 'mouseup':
       case 'touchend':
-        this.handleEnd( e );
+        this.handleEnd( event );
         break;
     }
   }
 
-  recordData( key, e )
+  recordData( key, event )
   {
-    const { target } = e;
-    const touch = e.changedTouches && e.changedTouches.length === 1 ? e.changedTouches[ 0 ] : false;
+    const { target } = event;
+    const touch = event.changedTouches && event.changedTouches.length === 1 ? event.changedTouches[ 0 ] : false;
     const time = performance.now();
-    const x = touch ? touch.pageX : e.pageX;
-    const y = touch ? touch.pageY : e.pageY;
+    const { pageX } = touch ? touch : event;
+    const { pageY } = touch ? touch : event;
 
-    this.data[ key ] = { target, time, x, y };
+    this.data[ key ] = { target, time, x: pageX, y: pageY };
   }
 
   isSwipe( start, end, xy )
